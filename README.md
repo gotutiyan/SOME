@@ -31,24 +31,38 @@ tree gfm-models
 # │   ├── training_args.bin
 # │   └── vocab.txt
 # ├── grammer
-# │   ├── config.json
-# │   ├── pytorch_model.bin
-# │   ├── special_tokens_map.json
-# │   ├── tokenizer_config.json
-# │   ├── training_args.bin
-# │   └── vocab.txt
+# │   ├── ...
 # └── meaning
-#     ├── config.json
-#     ├── pytorch_model.bin
-#     ├── special_tokens_map.json
-#     ├── tokenizer_config.json
-#     ├── training_args.bin
-#     └── vocab.txt
+#     ├── ...
 ```
 
 
 
 # How to use
+
+```py
+from some_wrapper import Dataclass_for_args, SOME_Wrapper
+
+some = SOME_Wrapper(
+    g_dir='gfm-models/grammer',
+    f_dir='gfm-models/fluency',
+    m_dir='gfm-models/meaning',
+    batch_size=5,
+    weight_g=0.55,
+    weight_f=0.43,
+    weight_m=0.02
+)
+srcs = [
+    'This is a sample sentence .',
+    'This is an another sample sentene .'
+]
+trgs = [
+    'This a is sample sentence .',
+    'This is another sample sentence .'
+]
+scores = some.score(srcs, trgs)
+print(scores) # [0.7722907622655234, 0.9522199455897014]
+```
 
 ```
 python some.py [hypothesis file] [source file] \
