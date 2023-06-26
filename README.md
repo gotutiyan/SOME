@@ -13,14 +13,8 @@ Paper: https://www.aclweb.org/anthology/2020.coling-main.573.pdf
 
 These models can be downloaded by:
 
-```bash
-S1="1uoAReQK3f5g9CEy8rV4haSzXll8NqVHW";
-S2="gfm-models.zip";
-CONFIRM=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate "https://drive.google.com/uc?export=download&id=$S1" -O- | sed -En 's/.*confirm=([0-9A-Za-z_]+).*/\1/p');
-wget --load-cookies /tmp/cookies.txt "https://drive.google.com/uc?export=download&confirm=$CONFIRM&id=$S1" -O $S2;
-rm -f /tmp/cookies.txt
-
-unzip gfm-models.zip
+```sh
+bash prepare.sh
 tree gfm-models
 # gfm-models
 # ├── fluency
@@ -36,10 +30,9 @@ tree gfm-models
 #     ├── ...
 ```
 
-
-
 # How to use
 
+### API
 ```py
 from some_wrapper import Dataclass_for_args, SOME_Wrapper
 
@@ -64,7 +57,8 @@ scores = some.score(srcs, trgs)
 print(scores) # [0.7722907622655234, 0.9522199455897014]
 ```
 
-```
+### CLI
+```sh
 python some.py [hypothesis file] [source file] \
     --g-dir [directry path of grammar model] \
     --f-dir [directry path of fluency model] \
